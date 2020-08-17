@@ -1,4 +1,4 @@
-package com.gbujak.springcraigslistclone.models;
+package com.gbujak.springcraigslistclone.model;
 
 public enum AdvertisementCategory {
     COMMUNITY("społeczność"),
