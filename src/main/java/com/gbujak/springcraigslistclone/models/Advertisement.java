@@ -24,6 +24,8 @@ public class Advertisement {
 
     private Date date;
 
+    private AdvertisementCategory category;
+
     // TODO: Add user column
     //@ManyToOne
     //private ApplicationUser user;
