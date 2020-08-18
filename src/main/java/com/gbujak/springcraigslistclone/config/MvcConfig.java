@@ -13,13 +13,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // TODO: make this work (maybe amazon s3?)
         registry
                 .addResourceHandler("/uploads/**")
-                .addResourceLocations("/opt/uploads");
+                .addResourceLocations("file:/opt/uploads");
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(16);
+        return new BCryptPasswordEncoder();
     }
 }
