@@ -1,1 +1,7 @@
 <h1>Index</h1>
+
+<ul data-th-each="category : ${categories}">
+    <li>
+        <a data-th-text="${category}" data-th-href="@{/category/{category}(category=${category})}"></a>
+    </li>
+</ul>
