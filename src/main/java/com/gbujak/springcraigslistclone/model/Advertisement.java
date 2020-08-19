@@ -4,7 +4,10 @@ import lombok.Data;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.sql.Date;
 import java.util.Set;
 
@@ -22,7 +25,8 @@ public class Advertisement {
     // Safe HTML ad content generated from markdown written by user
     private String advertisementSafeHtmlContent;
 
-    private Date date;
+    // Auto set to current date
+    private Date date = new Date(new java.util.Date().getTime());
 
     private AdvertisementCategory category;
 
