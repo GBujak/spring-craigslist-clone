@@ -18,6 +18,8 @@ public class Advertisement {
     @GeneratedValue
     private Long id;
 
+    private String title;
+
     @OneToMany
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE}) // Delete images on advertisement deletion
     private Set<Image> images;

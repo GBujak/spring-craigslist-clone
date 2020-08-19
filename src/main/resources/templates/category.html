@@ -1,3 +1,5 @@
 <h1>Category</h1>
 
-<h2 data-th-text="${test}"></h2>
+<ul data-th-each="ad : ${ads}">
+    <li data-th-text="${ad.title}"></li>
+</ul>

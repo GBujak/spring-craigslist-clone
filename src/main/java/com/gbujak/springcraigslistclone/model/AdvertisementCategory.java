@@ -1,25 +1,25 @@
 package com.gbujak.springcraigslistclone.model;
 
 public enum AdvertisementCategory {
-    COMMUNITY("społeczność", "spolecznosc"),
-    FOR_SALE("na sprzedaż", "na-sprzedaz"),
+    COMMUNITY("spolecznosc", "społeczność"),
+    FOR_SALE("na-sprzedaz", "na sprzedaż"),
     JOBS("praca", "praca"),
     HOUSING("mieszkanie", "mieszkanie"),
-    SERVICES("usługi", "uslugi");
+    SERVICES("uslugi", "usługi");
 
     private final String name;
-    private final String slug;
+    private final String humanReadableName;
 
-    AdvertisementCategory(String name, String slug) {
+    AdvertisementCategory(String name, String humanReadableName) {
         this.name = name;
-        this.slug = slug;
+        this.humanReadableName = humanReadableName;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getSlug() {
-        return slug;
+    public String getHumanReadableName() {
+        return humanReadableName;
     }
 }

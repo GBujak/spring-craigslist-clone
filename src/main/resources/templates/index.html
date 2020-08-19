@@ -2,8 +2,8 @@
 
 <ul data-th-each="category : ${categories}">
     <li>
-        <a data-th-text="${category.name}"
-           data-th-href="@{/category/{category}(category=${category.slug})}"
+        <a data-th-text="${category.humanReadableName}"
+           data-th-href="@{/category/{category}(category=${category.name})}"
         ></a>
     </li>
 </ul>
