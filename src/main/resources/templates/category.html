@@ -1,6 +1,22 @@
-<h1>Category</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title data-th-text="${categoryName}">Kategoria</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>Kategoria ogłoszeń: <span data-th-text="${categoryName}">Kategoria</span> </h1>
 
 <ul data-th-each="ad : ${ads}">
     <li><a data-th-text="${ad.title}"
            data-th-href="@{/advertisement/{id}(id=${ad.id})}"></a></li>
 </ul>
+
+</div>
+
+</body>
+</html>

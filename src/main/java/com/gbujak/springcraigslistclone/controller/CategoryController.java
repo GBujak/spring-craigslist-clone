@@ -25,6 +25,7 @@ public class CategoryController {
                 .filter(it -> it.getName().equals(categoryName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("category does not exist"));
+        model.addAttribute("categoryName", category.getHumanReadableName());
         model.addAttribute("ads", adService.findByCategory(category));
         return "category";
     }

@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title data-th-text="${ad.title}">Tytuł ogłoszenia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
 </head>
 <body>
+
+<div class="container">
+
     <div data-th-utext="${ad.htmlContent}">Treść ogłoszenia</div>
     <div data-th-text="${ad.date}">Data stworzenia ogłoszenia</div>
+
+</div>
+
 </body>
 </html>
