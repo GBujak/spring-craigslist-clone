@@ -13,13 +13,21 @@
 
     <form action="#" data-th-action="@{stworz-nowe}"
           data-th-object="${newAdvertisement}"
-          method="post">
+          method="post"
+          enctype="multipart/form-data">
+
+        <label for="images">Wybierz zdjęcia (jpg/png): </label>
+        <input type="file"
+               id="images" data-th-field="*{images}"
+               accept="image/png, image/jpeg"
+               multiple>
+
 
         <p>Tytuł: <input type="text" data-th-field="*{title}" /></p>
         <p style="margin-bottom: 0.2rem;">Treść:</p>
         <textarea
                 style="height: 30rem;"
-                placeholder="Wprowadź treść ogłoszenia" data-th-field="*{htmlContent}"></textarea>
+                placeholder="Wprowadź treść ogłoszenia" data-th-field="*{content}"></textarea>
         <br>
         <p>Kategoria:
             <select data-th-field="*{category}">

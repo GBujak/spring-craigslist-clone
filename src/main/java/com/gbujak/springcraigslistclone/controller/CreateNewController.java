@@ -3,6 +3,7 @@ package com.gbujak.springcraigslistclone.controller;
 import com.gbujak.springcraigslistclone.model.Advertisement;
 import com.gbujak.springcraigslistclone.service.AdvertisementService;
 import com.gbujak.springcraigslistclone.service.ApplicationUserDetailsService;
+import com.gbujak.springcraigslistclone.util.CreateNewAdFormObject;
 import com.gbujak.springcraigslistclone.util.UserInputProcessor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,8 +28,8 @@ public class CreateNewController {
     }
 
     @ModelAttribute(value = "newAdvertisement")
-    public Advertisement newAdvertisement() {
-        return new Advertisement();
+    public CreateNewAdFormObject newAdvertisement() {
+        return new CreateNewAdFormObject();
     }
 
     @GetMapping({"", "/"})
@@ -37,16 +38,19 @@ public class CreateNewController {
     }
 
     @PostMapping({"", "/"})
-    public RedirectView postNew(@ModelAttribute Advertisement advertisement,
-                                Principal principal,
-                                Model model) {
-
+    public RedirectView postNew(@ModelAttribute CreateNewAdFormObject newAdForm,
+                                Principal principal, Model model) {
+        var advertisement = new Advertisement();
         advertisement.setUserName(principal.getName());
 
+        advertisement.setTitle(newAdForm.getTitle());
+        advertisement.setCategory(newAdForm.getCategory());
+
         // Convert markdown to html and sanitize
-        advertisement.setHtmlContent(inputProcessor.process(advertisement.getHtmlContent()));
+        advertisement.setHtmlContent(inputProcessor.process(newAdForm.getContent()));
 
         var saved = adService.save(advertisement);
+        System.out.println("file count = " + newAdForm.getImages().length);
         System.out.println(saved);
         return new RedirectView("ogloszenie/" + saved.getId());
     }
