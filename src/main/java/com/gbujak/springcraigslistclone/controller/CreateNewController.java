@@ -3,6 +3,7 @@ package com.gbujak.springcraigslistclone.controller;
 import com.gbujak.springcraigslistclone.model.Advertisement;
 import com.gbujak.springcraigslistclone.service.AdvertisementService;
 import com.gbujak.springcraigslistclone.service.ApplicationUserDetailsService;
+import com.gbujak.springcraigslistclone.util.UserInputProcessor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,11 @@ import java.security.Principal;
 @RequestMapping("stworz-nowe")
 public class CreateNewController {
     private AdvertisementService adService;
+    private UserInputProcessor inputProcessor;
 
-    public CreateNewController(AdvertisementService adService) {
+    public CreateNewController(AdvertisementService adService, UserInputProcessor inputProcessor) {
         this.adService = adService;
+        this.inputProcessor = inputProcessor;
     }
 
     @ModelAttribute(value = "newAdvertisement")
@@ -37,7 +40,12 @@ public class CreateNewController {
     public RedirectView postNew(@ModelAttribute Advertisement advertisement,
                                 Principal principal,
                                 Model model) {
+
         advertisement.setUserName(principal.getName());
+
+        // Convert markdown to html and sanitize
+        advertisement.setHtmlContent(inputProcessor.process(advertisement.getHtmlContent()));
+
         var saved = adService.save(advertisement);
         System.out.println(saved);
         return new RedirectView("ogloszenie/" + saved.getId());
