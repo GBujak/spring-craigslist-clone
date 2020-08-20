@@ -4,10 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
 
@@ -32,7 +29,6 @@ public class Advertisement {
 
     private AdvertisementCategory category;
 
-    // TODO: Add user column
-    //@ManyToOne
-    //private ApplicationUser user;
+    // TODO: Change username to user foreign key ?
+    private String userName;
 }
