@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Arrays;
 
 @Controller
-@RequestMapping("category")
+@RequestMapping("kategoria")
 public class CategoryController {
     private final AdvertisementService adService;
 
