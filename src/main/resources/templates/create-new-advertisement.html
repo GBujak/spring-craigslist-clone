@@ -16,7 +16,11 @@
           method="post">
 
         <p>Tytuł: <input type="text" data-th-field="*{title}" /></p>
-        <p>Treść: <input type="text" data-th-field="*{htmlContent}" /></p>
+        <p style="margin-bottom: 0.2rem;">Treść:</p>
+        <textarea
+                style="height: 30rem;"
+                placeholder="Wprowadź treść ogłoszenia" data-th-field="*{htmlContent}"></textarea>
+        <br>
         <p>Kategoria:
             <select data-th-field="*{category}">
                 <option data-th-each="cat : ${T(com.gbujak.springcraigslistclone.model.AdvertisementCategory).values()}"
