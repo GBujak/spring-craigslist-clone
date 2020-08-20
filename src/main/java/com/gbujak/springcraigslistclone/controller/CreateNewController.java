@@ -1,6 +1,7 @@
 package com.gbujak.springcraigslistclone.controller;
 
 import com.gbujak.springcraigslistclone.model.Advertisement;
+import com.gbujak.springcraigslistclone.model.Image;
 import com.gbujak.springcraigslistclone.service.AdvertisementService;
 import com.gbujak.springcraigslistclone.service.ApplicationUserDetailsService;
 import com.gbujak.springcraigslistclone.util.CreateNewAdFormObject;
@@ -49,8 +50,10 @@ public class CreateNewController {
         // Convert markdown to html and sanitize
         advertisement.setHtmlContent(inputProcessor.process(newAdForm.getContent()));
 
+        var imageSet = Image.fromMultiparts(newAdForm.getImages());
+        advertisement.setImages(imageSet);
+
         var saved = adService.save(advertisement);
-        System.out.println("file count = " + newAdForm.getImages().length);
         System.out.println(saved);
         return new RedirectView("ogloszenie/" + saved.getId());
     }
