@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tworzenie nowego ogłoszenia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Stwórz nowe ogłoszenie</h1>
+
+    <form action="#" data-th-action="@{stworz-nowe}"
+          data-th-object="${newAdvertisement}"
+          method="post">
+
+        <p>Tytuł: <input type="text" data-th-field="*{title}" /></p>
+        <p>Treść: <input type="text" data-th-field="*{htmlContent}" /></p>
+        <p>Kategoria:
+            <select data-th-field="*{category}">
+                <option data-th-each="cat : ${T(com.gbujak.springcraigslistclone.model.AdvertisementCategory).values()}"
+                    data-th-value="${cat}" data-th-text="${cat.humanReadableName}">
+                </option>
+            </select>
+        </p>
+        <p><input type="submit" value="Opublikuj"></p>
+
+    </form>
+
+</div>
+
+</body>
+</html>
