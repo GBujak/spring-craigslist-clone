@@ -1,5 +1,6 @@
 <h1>Category</h1>
 
 <ul data-th-each="ad : ${ads}">
-    <li data-th-text="${ad.title}"></li>
+    <li><a data-th-text="${ad.title}"
+           data-th-href="@{/advertisement/{id}(id=${ad.id})}"></a></li>
 </ul>

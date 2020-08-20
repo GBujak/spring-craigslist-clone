@@ -25,7 +25,7 @@ public class Advertisement {
     private Set<Image> images;
 
     // Safe HTML ad content generated from markdown written by user
-    private String advertisementSafeHtmlContent;
+    private String htmlContent;
 
     // Auto set to current date
     private Date date = new Date(new java.util.Date().getTime());

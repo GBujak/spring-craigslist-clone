@@ -33,7 +33,7 @@ public class Bootstrap implements CommandLineRunner {
         System.out.println(userDetailsService.save(testUser));
 
         var ad = new Advertisement();
-        ad.setAdvertisementSafeHtmlContent("<h1>ad test</h1>");
+        ad.setHtmlContent("<h1>ad test</h1>");
         ad.setCategory(AdvertisementCategory.COMMUNITY);
         ad.setImages(new HashSet<>());
         ad.setTitle("test ad");
