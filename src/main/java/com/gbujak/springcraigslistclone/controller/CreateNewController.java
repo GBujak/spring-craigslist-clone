@@ -5,6 +5,7 @@ import com.gbujak.springcraigslistclone.model.Image;
 import com.gbujak.springcraigslistclone.service.AdvertisementService;
 import com.gbujak.springcraigslistclone.service.ApplicationUserDetailsService;
 import com.gbujak.springcraigslistclone.util.CreateNewAdFormObject;
+import com.gbujak.springcraigslistclone.util.ImageDiskSaver;
 import com.gbujak.springcraigslistclone.util.UserInputProcessor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -22,10 +23,14 @@ import java.security.Principal;
 public class CreateNewController {
     private AdvertisementService adService;
     private UserInputProcessor inputProcessor;
+    private ImageDiskSaver imageDiskSaver;
 
-    public CreateNewController(AdvertisementService adService, UserInputProcessor inputProcessor) {
+    public CreateNewController(AdvertisementService adService,
+                               UserInputProcessor inputProcessor,
+                               ImageDiskSaver imageDiskSaver) {
         this.adService = adService;
         this.inputProcessor = inputProcessor;
+        this.imageDiskSaver = imageDiskSaver;
     }
 
     @ModelAttribute(value = "newAdvertisement")
@@ -50,7 +55,7 @@ public class CreateNewController {
         // Convert markdown to html and sanitize
         advertisement.setHtmlContent(inputProcessor.process(newAdForm.getContent()));
 
-        var imageSet = Image.fromMultiparts(newAdForm.getImages());
+        var imageSet = imageDiskSaver.fromMultipartsSaveToService(newAdForm.getImages());
         advertisement.setImages(imageSet);
 
         var saved = adService.save(advertisement);
