@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tablica Ogłoszeniowa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Rejestracja</h1>
+    <p data-th-if="${formError != null}">
+        <em style="color: red;" data-th-text="${formError}"></em>
+    </p>
+
+    <form action="#" data-th-action="@{rejestracja}"
+          data-th-object="${newUser}"
+          method="post">
+
+        <p>Nazwa użytkownika: <input type="text" data-th-field="*{username}" /></p>
+        <p>Hasło: <input type="password" data-th-field="*{password}" /></p>
+        <p>Potwierdź hasło: <input type="password" data-th-field="*{passwordConfirm}" /></p>
+
+        <p><input type="submit" value="Rejestruj"></p>
+
+    </form>
+
+</div>
+
+</body>
+</html>
