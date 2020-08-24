@@ -13,11 +13,6 @@
 
     <h1 data-th-text="${ad.title}">Tytuł</h1>
 
-<!--    <div>-->
-<!--        <img data-th-each="img : ${ad.images}"-->
-<!--             data-th-src="@{/zdjecie/{url}(url=${img.fileUrl})}" />-->
-<!--    </div>-->
-
     <div id="lightgallery" class="row">
         <a class="column"
            data-th-each="img : ${ad.images}"
@@ -29,6 +24,17 @@
     <div data-th-utext="${ad.htmlContent}">Treść ogłoszenia</div>
     <div data-th-text="${ad.date}">Data stworzenia ogłoszenia</div>
     <div data-th-text="${ad.userName}">Użytkownik</div>
+
+    <br>
+
+    <form action="#" data-th-action="@{/zglos-naduzycie}"
+          data-th-object="${newReport}"
+          method="post">
+
+        <p>Zgłoś nadużycie: <input type="text" placeholder="Opis nadużycia..." data-th-field="*{description}" /></p>
+        <input type="hidden" data-th-field="*{advertisementId}" data-th-value="${ad.id}">
+        <p><input type="submit" value="Zgłoś"></p>
+    </form>
 
 </div>
 
