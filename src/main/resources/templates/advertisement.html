@@ -13,6 +13,10 @@
 
     <h1 data-th-text="${ad.title}">Tytuł</h1>
 
+    <h3 data-th-if="${message != null}">
+        <em style="color: red;" data-th-text="${message}"></em>
+    </h3>
+
     <div id="lightgallery" class="row">
         <a class="column"
            data-th-each="img : ${ad.images}"
@@ -27,14 +31,13 @@
 
     <br>
 
-    <form action="#" data-th-action="@{/zglos-naduzycie}"
-          data-th-object="${newReport}"
-          method="post">
-
-        <p>Zgłoś nadużycie: <input type="text" placeholder="Opis nadużycia..." data-th-field="*{description}" /></p>
-        <input type="hidden" data-th-field="*{advertisementId}" data-th-value="${ad.id}">
-        <p><input type="submit" value="Zgłoś"></p>
-    </form>
+    <div style="margin-top: 100px;">
+        <form action="#" data-th-action="@{/zglos-naduzycie}" method="post">
+            <p>Zgłoś nadużycie: <input type="text" placeholder="Opis nadużycia..." name="description" /></p>
+            <input type="hidden" name="advertisementId" data-th-value="${ad.id}">
+            <p><input type="submit" value="Zgłoś"></p>
+        </form>
+    </div>
 
 </div>
 

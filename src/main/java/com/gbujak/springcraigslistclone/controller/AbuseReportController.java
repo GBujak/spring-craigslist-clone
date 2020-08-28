@@ -5,10 +5,13 @@ import com.gbujak.springcraigslistclone.service.AbuseReportService;
 import com.gbujak.springcraigslistclone.service.AdvertisementService;
 import com.gbujak.springcraigslistclone.util.AbuseReportFormObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -22,22 +25,23 @@ public class AbuseReportController {
         this.advertisementService = advertisementService;
     }
 
-    @ModelAttribute(value = "newReport")
-    public AbuseReportFormObject abuseReportFormObject() {
-        return new AbuseReportFormObject();
-    }
-
     @PostMapping({"", "/"})
-    public RedirectView postAbuseReport(@ModelAttribute AbuseReportFormObject newAbuseReport, ModelMap model) {
-        var advertisement = advertisementService.findById(newAbuseReport.getAdvertisementId())
+    public ModelAndView postAbuseReport(
+            ModelMap model,
+            @RequestParam("advertisementId") Long advertisementId,
+            @RequestParam("description") String description
+    ) {
+        var advertisement = advertisementService.findById(advertisementId)
                 .orElseThrow(() -> new IllegalArgumentException("Advertisement does not exist"));
 
         var abuseReport = new AbuseReport();
 
-        abuseReport.setDescription(newAbuseReport.getDescription());
+        abuseReport.setDescription(description);
         abuseReport.setAdvertisement(advertisement);
         abuseReportService.save(abuseReport);
 
-        return new RedirectView("ogloszenie/" + newAbuseReport.getAdvertisementId());
+        model.addAttribute("message", "Zgłoszono nadużycie!");
+
+        return new ModelAndView("redirect:/ogloszenie/" + advertisementId, model);
     }
 }
