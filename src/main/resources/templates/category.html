@@ -9,12 +9,15 @@
 
 <div class="container">
 
-<h1>Kategoria ogłoszeń: <span data-th-text="${categoryName}">Kategoria</span> </h1>
+    <h1>Kategoria ogłoszeń: <span data-th-text="${categoryName}">Kategoria</span> </h1>
 
-<ul data-th-each="ad : ${ads}">
-    <li><a data-th-text="${ad.title}"
-           data-th-href="@{/ogloszenie/{id}(id=${ad.id})}"></a></li>
-</ul>
+    <ul data-th-each="ad : ${ads}">
+        <li><a data-th-text="${ad.title}"
+               data-th-href="@{/ogloszenie/{id}(id=${ad.id})}"></a></li>
+    </ul>
+
+    <a data-th-if="${nextPage < totalPages}" data-th-href="@{/kategoria/{cat}?page={next}(cat=${categoryUrl},next=${nextPage})}">Kolejna Strona</a>
+    <p data-th-if="${nextPage >= totalPages}">Znajdujesz się na ostatniej stronie</p>
 
 </div>
 
