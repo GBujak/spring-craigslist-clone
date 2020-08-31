@@ -17,4 +17,6 @@ public class ApplicationUser {
     @Column(nullable = false, unique = true)
     private String username;
     private String password;
+
+    private Boolean isAdmin = false;
 }

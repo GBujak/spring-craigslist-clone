@@ -33,6 +33,12 @@ public class Bootstrap implements CommandLineRunner {
         testUser.setPassword(passwordEncoder.encode("password"));
         System.out.println(userDetailsService.save(testUser));
 
+        var admin = new ApplicationUser();
+        admin.setUsername("admin");
+        admin.setIsAdmin(true);
+        admin.setPassword(passwordEncoder.encode("admin"));
+        userDetailsService.save(admin);
+
         var ad = new Advertisement();
         ad.setHtmlContent("<h1>ad test</h1>");
         ad.setCategory(AdvertisementCategory.COMMUNITY);
