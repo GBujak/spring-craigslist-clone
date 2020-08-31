@@ -34,4 +34,8 @@ public class AdvertisementService {
     public void delete(Advertisement advertisement) {
         adRepository.delete(advertisement);
     }
+
+    public List<Advertisement> findByUserName(String username) {
+        return adRepository.findByUserName(username);
+    }
 }

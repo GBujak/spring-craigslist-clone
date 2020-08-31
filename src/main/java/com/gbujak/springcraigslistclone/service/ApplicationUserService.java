@@ -25,4 +25,8 @@ public class ApplicationUserService {
     public Optional<ApplicationUser> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    public void delete(String username) {
+        userRepository.deleteByUsername(username);
+    }
 }

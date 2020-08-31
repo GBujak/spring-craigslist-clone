@@ -21,7 +21,7 @@
         <a class="column"
            data-th-each="img : ${ad.images}"
            data-th-href="@{/zdjecie/{url}(url=${img.fileUrl})}">
-            <img data-th-src="@{/zdjecie/{url}(url=${img.fileUrl})}">
+            <img src="#" alt="Ogłoszenie nie ma zdjęć" data-th-src="@{/zdjecie/{url}(url=${img.fileUrl})}">
         </a>
     </div>
 
@@ -31,7 +31,13 @@
 
     <br>
 
-    <div style="margin-top: 100px;">
+    <div data-th-if="${canDelete}">
+        <a data-th-href="@{/usun/{id}(id=${ad.id})}">
+            <button style="color: white; background: #d55;">Usuń ogłoszenie</button>
+        </a>
+    </div>
+
+    <div data-th-if="${!canDelete}" style="margin-top: 100px;">
         <form action="#" data-th-action="@{/zglos-naduzycie}" method="post">
             <p>Zgłoś nadużycie: <input type="text" placeholder="Opis nadużycia..." name="description" /></p>
             <input type="hidden" name="advertisementId" data-th-value="${ad.id}">

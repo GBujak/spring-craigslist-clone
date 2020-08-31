@@ -30,14 +30,4 @@ public class AdminController {
         model.addAttribute("nextPage", page + 1);
         return new ModelAndView("admin-view-reports", model);
     }
-
-    @GetMapping("usun-ogloszenie/{id}")
-    public ModelAndView deleteAdvertisement(ModelMap model, @PathVariable Long id) {
-        var advert = advertisementService.findById(id);
-        model.addAttribute("message", (advert.isPresent()) ? "Pomyślnie usunięto ogłoszenie"
-                                                                          : "Nie znaleziono ogłoszenia");
-        advert.ifPresent(advertisementService::delete);
-
-        return new ModelAndView("admin-view-reports", model);
-    }
 }
