@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 @Component
@@ -35,7 +36,7 @@ public class Bootstrap implements CommandLineRunner {
         var ad = new Advertisement();
         ad.setHtmlContent("<h1>ad test</h1>");
         ad.setCategory(AdvertisementCategory.COMMUNITY);
-        ad.setImages(new HashSet<>());
+        ad.setImages(new ArrayList<>());
         ad.setTitle("test ad");
         adService.save(ad);
     }

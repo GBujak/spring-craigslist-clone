@@ -55,8 +55,10 @@ public class CreateNewController {
         // Convert markdown to html and sanitize
         advertisement.setHtmlContent(inputProcessor.process(newAdForm.getContent()));
 
-        var imageSet = imageDiskSaver.fromMultipartsSaveToService(newAdForm.getImages());
-        advertisement.setImages(imageSet);
+        var imageList = imageDiskSaver.fromMultiparts(newAdForm.getImages());
+        advertisement.setImages(imageList);
+
+        advertisement.getImages().stream().forEach(image -> image.setAdvertisement(advertisement));
 
         var saved = adService.save(advertisement);
         System.out.println(saved);

@@ -2,9 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Zgłoszenia nadużycia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
 </head>
 <body>
-
+    <div class="container">
+        <ul>
+            <li data-th-each="report : ${reports}" style="border: 1px solid grey; padding: 2em;">
+                <em>[[${report.description}]]</em>
+                <br>
+                <a data-th-href="@{/ogloszenie/{id}(id=${report.advertisement.id})}">
+                    Link do zgłoszenia
+                </a>
+                <a data-th-href="@{/admin/usun-ogloszenie/{id}(id=${report.advertisement.id})}">
+                   Usuń ogłoszenie
+                </a>
+            </li>
+        </ul>
+        <a data-th-if="${nextPage < totalPages}" data-th-href="@{/admin/zgloszenia?page={next}(next=${nextPage})}">Kolejna Strona</a>
+        <p data-th-if="${nextPage >= totalPages}">Znajdujesz się na ostatniej stronie</p>
+    </div>
 </body>
 </html>

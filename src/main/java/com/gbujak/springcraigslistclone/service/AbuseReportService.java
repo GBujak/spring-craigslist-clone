@@ -29,4 +29,8 @@ public class AbuseReportService {
         var pageRequest = PageRequest.of(page, size);
         return abuseReportRepository.findAll(pageRequest);
     }
+
+    public void deleteByAdvertisement(Advertisement advertisement) {
+        abuseReportRepository.deleteByAdvertisement(advertisement);
+    }
 }

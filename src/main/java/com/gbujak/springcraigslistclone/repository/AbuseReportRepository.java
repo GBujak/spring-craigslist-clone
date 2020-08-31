@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface AbuseReportRepository extends PagingAndSortingRepository<AbuseReport, Long> {
     List<AbuseReport> findByAdvertisement(Advertisement advertisement);
+    void deleteByAdvertisement(Advertisement advertisement);
 }

@@ -8,9 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -24,8 +22,8 @@ public class ImageDiskSaver {
     @Value("${imageStorageDirectory}")
     private String imageDirectory; // = "/home/gbujak/Pictures/spring_pics";
 
-    public Set<Image> fromMultiparts(MultipartFile[] multipartFiles) {
-        var set = new HashSet<Image>();
+    public List<Image> fromMultiparts(MultipartFile[] multipartFiles) {
+        var list = new ArrayList<Image>();
         for (var multipartFile : multipartFiles) {
             var filename = Paths.get(
                     UUID.randomUUID().toString() + "_" +
@@ -39,15 +37,15 @@ public class ImageDiskSaver {
             }
             var image = new Image();
             image.setFileUrl(filename.toString());
-            set.add(image);
+            list.add(image);
         }
-        return set;
+        return list;
     }
 
-    public Set<Image> fromMultipartsSaveToService(MultipartFile[] files) {
+    public List<Image> fromMultipartsSaveToService(MultipartFile[] files) {
         var images = fromMultiparts(files);
         return images.stream()
                 .map(it -> imageService.save(it))
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 }

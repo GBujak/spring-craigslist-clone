@@ -2,10 +2,10 @@ package com.gbujak.springcraigslistclone.model;
 
 import lombok.Data;
 import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -17,9 +17,10 @@ public class Advertisement {
 
     private String title;
 
-    @OneToMany
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE}) // Delete images on advertisement deletion
-    private Set<Image> images;
+    @OneToMany(
+            mappedBy = "advertisement", cascade = CascadeType.ALL
+    )
+    private List<Image> images;
 
     // Safe HTML ad content generated from markdown written by user
     private String htmlContent;
@@ -31,4 +32,9 @@ public class Advertisement {
 
     // TODO: Change username to user foreign key ?
     private String userName;
+
+    @OneToMany(
+            mappedBy = "advertisement", cascade = CascadeType.ALL
+    )
+    private List<AbuseReport> abuseReports;
 }

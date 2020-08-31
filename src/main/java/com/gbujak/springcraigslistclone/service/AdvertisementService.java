@@ -28,12 +28,7 @@ public class AdvertisementService {
         return adRepository.save(ad);
     }
 
-    public boolean delete(Long id) {
-        if (adRepository.findById(id).isPresent()) {
-            adRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
+    public void delete(Advertisement advertisement) {
+        adRepository.delete(advertisement);
     }
 }

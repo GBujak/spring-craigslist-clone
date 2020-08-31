@@ -25,16 +25,19 @@ public class AdminController {
     public ModelAndView getReports(ModelMap model, @RequestParam(required = false) Integer page) {
         if (page == null) page = 0;
         var reportPage = abuseReportService.findPaginated(page, PAGE_SIZE);
+        model.addAttribute("totalPages", reportPage.getTotalPages());
         model.addAttribute("reports", reportPage.getContent());
-        model.addAttribute("next-page", page + 1);
+        model.addAttribute("nextPage", page + 1);
         return new ModelAndView("admin-view-reports", model);
     }
 
-    @PostMapping("usun-ogloszenie/{id}")
+    @GetMapping("usun-ogloszenie/{id}")
     public ModelAndView deleteAdvertisement(ModelMap model, @PathVariable Long id) {
-        var result = advertisementService.delete(id);
-        model.addAttribute("message", (result) ? "Pomyślnie usunięto ogłoszenie"
-                                                              : "Nie znaleziono ogłoszenia");
+        var advert = advertisementService.findById(id);
+        model.addAttribute("message", (advert.isPresent()) ? "Pomyślnie usunięto ogłoszenie"
+                                                                          : "Nie znaleziono ogłoszenia");
+        advert.ifPresent(advertisementService::delete);
+
         return new ModelAndView("admin-view-reports", model);
     }
 }
