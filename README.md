@@ -13,6 +13,6 @@ Funkcje:
     - opis w formacie Markdown przetwarzany na bezpieczny HTML
     - zdjęcia w formacie jpg / png wyświetlane w galerii
 
-- tworzenie zgłoszeń nadużycia ogłoszeń
+- zgłaszanie nadużyć
 
 - administrator z możliwością podglądu zgłoszeń nadużycia i usuwania ogłoszeń
