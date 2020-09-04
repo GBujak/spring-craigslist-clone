@@ -1,7 +1,7 @@
 # spring-craigslist-clone
 
-Tablica ogłoszeniowa podobra do <craigslist.org> napisana w Javie z wykorzystaniem
-Spring Boot.
+Tablica ogłoszeniowa podobra do [craigslist.net](https://craigslist.net) napisana w
+Javie z wykorzystaniem Spring Boot.
 
 Funkcje:
 
