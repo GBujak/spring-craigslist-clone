@@ -13,12 +13,12 @@
             <em style="color: red;" data-th-text="${message}"></em>
         </h3>
 
-        <div class="carousel">
+        <div data-th-if="${#lists.size(ad.images) > 0}" class="carousel">
             <a data-th-each="img : ${ad.images}"
                href="#"
                class="carousel-item">
 
-                <img src="#" data-th-src="@{/zdjecie/{url}(url=${img.fileUrl})}" class="materialboxed black" width="200">
+                <img src="#" data-th-src="@{/zdjecie/{url}(url=${img.fileUrl})}" class="materialboxed white" width="200">
 
             </a>
         </div>
