@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-layout-decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
     <title data-th-text="${categoryName}">Kategoria</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
 </head>
 <body>
 
-<div class="container">
+    <div data-layout-fragment="content">
 
-    <h1>Kategoria ogłoszeń: <span data-th-text="${categoryName}">Kategoria</span> </h1>
+        <h1>Kategoria ogłoszeń: <span data-th-text="${categoryName}">Kategoria</span> </h1>
 
-    <ul data-th-each="ad : ${ads}">
-        <li><a data-th-text="${ad.title}"
-               data-th-href="@{/ogloszenie/{id}(id=${ad.id})}"></a></li>
-    </ul>
+        <div data-th-each="ad : ${ads}" class="collection">
+            <a data-th-text="${ad.title}"
+               data-th-href="@{/ogloszenie/{id}(id=${ad.id})}"
+               class="collection-item" href="#"></a>
+        </div>
 
-    <a data-th-if="${nextPage < totalPages}" data-th-href="@{/kategoria/{cat}?page={next}(cat=${categoryUrl},next=${nextPage})}">Kolejna Strona</a>
-    <p data-th-if="${nextPage >= totalPages}">Znajdujesz się na ostatniej stronie</p>
+        <a data-th-if="${nextPage < totalPages}"
+           data-th-href="@{/kategoria/{cat}?page={next}(cat=${categoryUrl},next=${nextPage})}">
+            Kolejna Strona
+        </a>
+        <p data-th-if="${nextPage >= totalPages}">
+            Znajdujesz się na ostatniej stronie
+        </p>
 
-</div>
+    </div>
 
 </body>
 </html>
