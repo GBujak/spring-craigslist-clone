@@ -31,10 +31,14 @@ public class AdvertisementController {
         var ad = adService.findById(adId).orElseThrow(
                 () -> new IllegalArgumentException("Ad not found"));
 
-        var userOptional = userService.findByUsername(principal.getName());
-        model.addAttribute("canDelete", userOptional.isPresent()
-                && (userOptional.get().getIsAdmin()
-                || principal.getName().equals(ad.getUserName())));
+        if (principal != null) {
+            var userOptional = userService.findByUsername(principal.getName());
+            model.addAttribute("canDelete", userOptional.isPresent()
+                    && (userOptional.get().getIsAdmin()
+                    || principal.getName().equals(ad.getUserName())));
+        } else {
+            model.addAttribute("canDelete", false);
+        }
 
         model.addAttribute("ad", ad);
         model.addAttribute("message", message);
