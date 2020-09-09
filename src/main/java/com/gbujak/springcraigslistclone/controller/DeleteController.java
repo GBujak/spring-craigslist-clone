@@ -2,6 +2,7 @@ package com.gbujak.springcraigslistclone.controller;
 
 import com.gbujak.springcraigslistclone.service.AdvertisementService;
 import com.gbujak.springcraigslistclone.service.ApplicationUserService;
+import com.gbujak.springcraigslistclone.util.ImageDiskSaver;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,10 +18,12 @@ public class DeleteController {
 
     private ApplicationUserService userService;
     private AdvertisementService adService;
+    private ImageDiskSaver imageDiskSaver;
 
-    public DeleteController(ApplicationUserService userService, AdvertisementService adService) {
+    public DeleteController(ApplicationUserService userService, AdvertisementService adService, ImageDiskSaver imageDiskSaver) {
         this.userService = userService;
         this.adService = adService;
+        this.imageDiskSaver = imageDiskSaver;
     }
 
     @GetMapping("{id}")
@@ -33,6 +36,8 @@ public class DeleteController {
                 && (userOptional.get().getIsAdmin()
                 || principal.getName().equals(ad.get().getUserName()))
         ) {
+            ad.get().getImages().forEach(
+                    it -> imageDiskSaver.delete(it.getFileUrl()));
             adService.delete(ad.get());
         }
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.*;
@@ -24,7 +25,10 @@ public class ImageDiskSaver {
 
     public List<Image> fromMultiparts(MultipartFile[] multipartFiles) {
         var list = new ArrayList<Image>();
+        if (multipartFiles == null) return list;
         for (var multipartFile : multipartFiles) {
+            if (multipartFile.getOriginalFilename() == null 
+                    || multipartFile.getOriginalFilename().equals("")) continue;
             var filename = Paths.get(
                     UUID.randomUUID().toString() + "_" +
                             multipartFile.getOriginalFilename());
@@ -47,5 +51,14 @@ public class ImageDiskSaver {
         return images.stream()
                 .map(it -> imageService.save(it))
                 .collect(Collectors.toList());
+    }
+
+    public boolean delete(String filename) {
+        try {
+            var file = new File(Paths.get(imageDirectory, filename).toString());
+            return file.delete();
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
