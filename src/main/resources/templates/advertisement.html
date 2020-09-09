@@ -1,57 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-layout-decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
     <title data-th-text="${ad.title}">Tytuł ogłoszenia</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.7.3/css/lightgallery.min.css" integrity="sha512-fCa8pkw+vnVSYDMD0SpSXoAjh5qXIAW7GsyuMvHnWOKrwb42UhN5Zpyol4WQYUmMWd/ipQhxR0mDs474wm96ag==" crossorigin="anonymous" />
-
 </head>
 <body>
 
-<div class="container">
+    <div data-layout-fragment="content">
 
-    <h1 data-th-text="${ad.title}">Tytuł</h1>
+        <h1 data-th-text="${ad.title}">Tytuł</h1>
 
-    <h3 data-th-if="${message != null}">
-        <em style="color: red;" data-th-text="${message}"></em>
-    </h3>
+        <h3 data-th-if="${message != null}">
+            <em style="color: red;" data-th-text="${message}"></em>
+        </h3>
 
-    <div id="lightgallery" class="row">
-        <a class="column"
-           data-th-each="img : ${ad.images}"
-           data-th-href="@{/zdjecie/{url}(url=${img.fileUrl})}">
-            <img src="#" alt="Ogłoszenie nie ma zdjęć" data-th-src="@{/zdjecie/{url}(url=${img.fileUrl})}">
-        </a>
+        <div class="carousel">
+            <a data-th-each="img : ${ad.images}"
+               href="#"
+               class="carousel-item">
+
+                <img src="#" data-th-src="@{/zdjecie/{url}(url=${img.fileUrl})}" class="materialboxed black" width="200">
+
+            </a>
+        </div>
+
+        <div data-th-utext="${ad.htmlContent}">Treść ogłoszenia</div>
+        <div data-th-text="${ad.date}">Data stworzenia ogłoszenia</div>
+        <div data-th-text="${ad.userName}">Użytkownik</div>
+
+        <br>
+
+        <div data-th-if="${canDelete}">
+            <a data-th-href="@{/usun/{id}(id=${ad.id})}">
+                <button class="btn red darken-2 white-text">Usuń ogłoszenie</button>
+            </a>
+        </div>
+
+        <div style="padding: 1em; margin: 1em; margin-top: 5em;">
+            <div data-th-if="${!canDelete}">
+                <form action="#" data-th-action="@{/zglos-naduzycie}" method="post">
+                    <h4>Zgłoś nadużycie: <input type="text" placeholder="Opis nadużycia..." name="description" class="left"/></h4>
+                    <input type="hidden" name="advertisementId" data-th-value="${ad.id}">
+                    <p><input type="submit" class="btn left" value="Zgłoś"></p>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <div data-th-utext="${ad.htmlContent}">Treść ogłoszenia</div>
-    <div data-th-text="${ad.date}">Data stworzenia ogłoszenia</div>
-    <div data-th-text="${ad.userName}">Użytkownik</div>
-
-    <br>
-
-    <div data-th-if="${canDelete}">
-        <a data-th-href="@{/usun/{id}(id=${ad.id})}">
-            <button style="color: white; background: #d55;">Usuń ogłoszenie</button>
-        </a>
-    </div>
-
-    <div data-th-if="${!canDelete}" style="margin-top: 100px;">
-        <form action="#" data-th-action="@{/zglos-naduzycie}" method="post">
-            <p>Zgłoś nadużycie: <input type="text" placeholder="Opis nadużycia..." name="description" /></p>
-            <input type="hidden" name="advertisementId" data-th-value="${ad.id}">
-            <p><input type="submit" value="Zgłoś"></p>
-        </form>
-    </div>
-
-</div>
-
-    <!-- Image gallery javascript -->
-    <script src="https://cdn.jsdelivr.net/npm/lightgallery.js@1.1.1/dist/js/lightgallery.min.js"></script>
-    <script>
-        lightGallery(document.getElementById('lightgallery'));
-    </script>
 
 </body>
 </html>
