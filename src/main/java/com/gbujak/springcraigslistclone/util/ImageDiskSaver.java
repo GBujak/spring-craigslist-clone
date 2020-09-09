@@ -27,7 +27,7 @@ public class ImageDiskSaver {
         var list = new ArrayList<Image>();
         if (multipartFiles == null) return list;
         for (var multipartFile : multipartFiles) {
-            if (multipartFile.getOriginalFilename() == null 
+            if (multipartFile.getOriginalFilename() == null
                     || multipartFile.getOriginalFilename().equals("")) continue;
             var filename = Paths.get(
                     UUID.randomUUID().toString() + "_" +
