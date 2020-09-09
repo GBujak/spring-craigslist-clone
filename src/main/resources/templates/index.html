@@ -1,25 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-layout-decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Tablica Ogłoszeniowa</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
+    <title>Strona główna</title>
 </head>
 <body>
+    <div data-layout-fragment="content">
+        <h1>Strona główna</h1>
 
-<div class="container">
+        <h4>Kategorie ogłoszeń:</h4>
+        <div class="collection">
+            <a href="#" class="collection-item"
+               data-th-each="category : ${categories}"
+               data-th-text="${category.humanReadableName}"
+               data-th-href="@{/kategoria/{category}(category=${category.name})}">
+                <span class="badge">0</span>
+            </a>
+        </div>
 
-<h1>Index</h1>
-
-<ul data-th-each="category : ${categories}">
-    <li>
-        <a data-th-text="${category.humanReadableName}"
-           data-th-href="@{/kategoria/{category}(category=${category.name})}"
-        ></a>
-    </li>
-</ul>
-
-</div>
-
+    </div>
 </body>
 </html>
