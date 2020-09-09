@@ -3,14 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title data-layout-title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Tablica ogłoszeniowa</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Materialize CSS - Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
 
+<div data-th-replace="fragments/navbar :: navbar"></div>
+
 <div data-layout-fragment="content" class="container"></div>
 
 <!-- Materialize CSS - Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+      M.AutoInit();
+</script>
 </body>
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+
+<nav data-th-fragment="navbar"
+     class="nav-wrapper">
+
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="/login">Zaloguj</a></li>
+        <li><a href="/logout">Wyloguj</a></li>
+        <li><a href="/rejestracja">Stwórz konto</a></li>
+        <li><a href="/usun/konto" class="red darken-2 white-text">Usuń konto</a></li>
+    </ul>
+    <nav>
+        <div class="nav-wrapper" style="padding: 0 1em;">
+            <a href="/" class="brand-logo">Tablica Ogłoszeniowa</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="/stworz-nowe">Nowe ogłoszenie</a></li>
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Konto<i class="material-icons right">arrow_drop_down</i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+</nav>
+
+</body>
+</html>
