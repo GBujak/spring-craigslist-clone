@@ -1,46 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-layout-decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
     <title>Tworzenie nowego ogłoszenia</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.min.css">
 </head>
 <body>
 
-<div class="container">
+    <div data-layout-fragment="content">
 
-    <h1>Stwórz nowe ogłoszenie</h1>
+        <h1>Stwórz nowe ogłoszenie</h1>
 
-    <form action="#" data-th-action="@{stworz-nowe}"
-          data-th-object="${newAdvertisement}"
-          method="post"
-          enctype="multipart/form-data">
+        <form action="#" data-th-action="@{stworz-nowe}"
+              data-th-object="${newAdvertisement}"
+              method="post"
+              enctype="multipart/form-data">
 
-        <label for="images">Wybierz zdjęcia (Maksymalny rozmiar 5MB): </label>
-        <input type="file"
-               id="images" data-th-field="*{images}"
-               accept="image/png, image/jpeg"
-               multiple>
+            <label for="images">Wybierz zdjęcia (Maksymalny rozmiar 5MB): </label>
+            <input type="file"
+                   id="images" data-th-field="*{images}"
+                   accept="image/png, image/jpeg"
+                   multiple>
 
 
-        <p>Tytuł: <input type="text" data-th-field="*{title}" /></p>
-        <p style="margin-bottom: 0.2rem;">Treść:</p>
-        <textarea
-                style="height: 30rem;"
-                placeholder="Wprowadź treść ogłoszenia" data-th-field="*{content}"></textarea>
-        <br>
-        <p>Kategoria:
-            <select data-th-field="*{category}">
-                <option data-th-each="cat : ${T(com.gbujak.springcraigslistclone.model.AdvertisementCategory).values()}"
-                    data-th-value="${cat}" data-th-text="${cat.humanReadableName}">
-                </option>
-            </select>
-        </p>
-        <p><input type="submit" value="Opublikuj"></p>
+            <p>Tytuł: <input type="text" data-th-field="*{title}" /></p>
+            <p style="margin-bottom: 0.2rem;">Treść: (wspiera formatowanie Markdown)</p>
+            <textarea
+                    class="materialize-textarea"
+                    placeholder="Wprowadź treść ogłoszenia" data-th-field="*{content}"></textarea>
+            <br>
+            <p>Kategoria:
+                <select data-th-field="*{category}">
+                    <option data-th-each="cat : ${T(com.gbujak.springcraigslistclone.model.AdvertisementCategory).values()}"
+                        data-th-value="${cat}" data-th-text="${cat.humanReadableName}">
+                    </option>
+                </select>
+            </p>
+            <p><input type="submit" value="Opublikuj" class="btn"></p>
 
-    </form>
+        </form>
 
-</div>
+    </div>
 
 </body>
 </html>
