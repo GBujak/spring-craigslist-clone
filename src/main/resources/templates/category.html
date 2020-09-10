@@ -11,9 +11,11 @@
 
         <div class="collection">
             <a data-th-each="ad : ${ads}"
-               data-th-text="${ad.title}"
                data-th-href="@{/ogloszenie/{id}(id=${ad.id})}"
-               class="collection-item" href="#"></a>
+               class="collection-item" href="#">
+                [[${ad.title}]]
+                <span class="badge blue lighten-5">Opublikowano: [[${ad.date}]]</span>
+            </a>
         </div>
 
         <a data-th-if="${nextPage < totalPages}"
