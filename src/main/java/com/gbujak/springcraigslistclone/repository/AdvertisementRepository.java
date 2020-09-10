@@ -9,7 +9,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.List;
 
 public interface AdvertisementRepository extends PagingAndSortingRepository<Advertisement, Long> {
-    Page<Advertisement> findByCategory(AdvertisementCategory category, Pageable pageable);
+    Page<Advertisement> findByCategoryOrderByDateDesc(AdvertisementCategory category, Pageable pageable);
     Long countByCategory(AdvertisementCategory category);
     List<Advertisement> findByUserName(String username);
 }

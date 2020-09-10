@@ -20,7 +20,7 @@ public class AdvertisementService {
 
     public Page<Advertisement> findByCategory(AdvertisementCategory category, int page, int size) {
         var pageRequest = PageRequest.of(page, size);
-        return adRepository.findByCategory(category, pageRequest);
+        return adRepository.findByCategoryOrderByDateDesc(category, pageRequest);
     }
 
     public Optional<Advertisement> findById(Long id) {
