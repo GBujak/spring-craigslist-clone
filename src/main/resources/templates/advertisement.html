@@ -7,7 +7,7 @@
 
     <div data-layout-fragment="content">
 
-        <h1 data-th-text="${ad.title}">Tytuł</h1>
+        <h1 style="text-align: center;" data-th-text="${ad.title}">Tytuł</h1>
 
         <h3 data-th-if="${message != null}">
             <em style="color: red;" data-th-text="${message}"></em>
@@ -35,15 +35,17 @@
             </a>
         </div>
 
-        <div style="padding: 1em; margin: 1em; margin-top: 5em;">
-            <div data-th-if="${!canDelete}">
-                <form action="#" data-th-action="@{/zglos-naduzycie}" method="post">
-                    <h4>Zgłoś nadużycie: <input type="text" placeholder="Opis nadużycia..." name="description" class="left"/></h4>
-                    <input type="hidden" name="advertisementId" data-th-value="${ad.id}">
-                    <p><input type="submit" class="btn left" value="Zgłoś"></p>
-                </form>
-            </div>
+        <div class="row">
+            <form action="#" data-th-action="@{/zglos-naduzycie}" method="post" class="col m8">
+                <input type="hidden" name="advertisementId" data-th-value="${ad.id}">
+                <div class="input-field inline">
+                    <input id="description" type="text" name="description">
+                    <label for="description">Opis Nadużycia</label>
+                </div>
+                <input type="submit" class="btn red" style="display: inline-block; margin-left: 1em;" value="Zgłoś nadużycie">
+            </form>
         </div>
+
     </div>
 
 
