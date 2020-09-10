@@ -9,8 +9,9 @@
 
         <h1>Kategoria ogłoszeń: <span data-th-text="${categoryName}">Kategoria</span> </h1>
 
-        <div data-th-each="ad : ${ads}" class="collection">
-            <a data-th-text="${ad.title}"
+        <div class="collection">
+            <a data-th-each="ad : ${ads}"
+               data-th-text="${ad.title}"
                data-th-href="@{/ogloszenie/{id}(id=${ad.id})}"
                class="collection-item" href="#"></a>
         </div>
