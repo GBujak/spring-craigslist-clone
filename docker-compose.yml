@@ -5,7 +5,7 @@ services:
     build: .
     restart: always
     volumes: 
-      - /var/lib/application/images:/var/lib/application/images
+      - imagevolume:/var/lib/application/images
     ports:
       - 8080:8080
     depends_on:
@@ -23,7 +23,7 @@ services:
     image: postgres
     restart: always
     volumes:
-      - /var/lib/application/data:/var/lib/postgresql/data
+      - dbvolume:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:
@@ -42,7 +42,9 @@ services:
     volumes:
       - ./conf.d:/etc/nginx/user.conf.d:ro
       - letsencrypt:/etc/letsencrypt
-      - /var/lib/application/images:/var/lib/application/images
+      - imagevolume:/var/lib/application/images
 
 volumes:
   letsencrypt:
+  dbvolume:
+  imagevolume:
