@@ -19,7 +19,8 @@
         </div>
 
         <a data-th-if="${nextPage < totalPages}"
-           data-th-href="@{/kategoria/{cat}?page={next}(cat=${categoryUrl},next=${nextPage})}">
+           data-th-href="@{/kategoria/{cat}?page={next}(cat=${categoryUrl},next=${nextPage})}"
+           class="btn blue lighten-5 black-text">
             Kolejna Strona
         </a>
         <p data-th-if="${nextPage >= totalPages}">
