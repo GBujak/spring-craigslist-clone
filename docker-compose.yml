@@ -30,3 +30,19 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
       - POSTGRES_DB=mydb
+
+  application-proxy:
+    image: staticfloat/nginx-certbot
+    restart: unless-stopped
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    environment:
+      CERTBOT_EMAIL: grzegorzbujak10@gmail.com
+    volumes:
+      - ./conf.d:/etc/nginx/user.conf.d:ro
+      - letsencrypt:/etc/letsencrypt
+      - /var/lib/application/images:/var/lib/application/images
+
+volumes:
+  letsencrypt:
