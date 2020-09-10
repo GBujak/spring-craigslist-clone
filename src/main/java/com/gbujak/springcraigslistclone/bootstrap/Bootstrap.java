@@ -28,6 +28,11 @@ public class Bootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        if (userDetailsService.loadUserByUsername("admin") != null) {
+            System.out.println("--> not running bootstrap, admin exists!");
+            return;
+        }
+
         var testUser = new ApplicationUser();
         testUser.setUsername("testuser");
         testUser.setPassword(passwordEncoder.encode("password"));
