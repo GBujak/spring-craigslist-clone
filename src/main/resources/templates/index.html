@@ -12,10 +12,10 @@
         <h4>Kategorie ogłoszeń:</h4>
         <div class="collection">
             <a href="#" class="collection-item"
-               data-th-each="category : ${categories}"
-               data-th-text="${category.humanReadableName}"
-               data-th-href="@{/kategoria/{category}(category=${category.name})}">
-                <span class="badge">0</span>
+               data-th-each="entry : ${categoryToCount}"
+               data-th-href="@{/kategoria/{category}(category=${entry.key.name})}">
+                [[${entry.key.humanReadableName}]]
+                <span class="badge blue lighten-5">Ilość: [[${entry.value}]]</span>
             </a>
         </div>
 

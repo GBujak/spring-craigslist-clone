@@ -38,4 +38,8 @@ public class AdvertisementService {
     public List<Advertisement> findByUserName(String username) {
         return adRepository.findByUserName(username);
     }
+
+    public Long countByCategory(AdvertisementCategory category) {
+        return adRepository.countByCategory(category);
+    }
 }
