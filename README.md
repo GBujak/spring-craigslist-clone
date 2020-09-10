@@ -5,7 +5,7 @@ Javie z wykorzystaniem Spring Boot.
 
 Funkcje:
 
-- rejestracja, logowanie, wylogowanie
+- rejestracja, logowanie, wylogowanie, zmiana hasła
 
 - tworzenie nowych ogłoszeń zawierających:
     - datę utworzenia
