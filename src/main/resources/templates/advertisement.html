@@ -35,7 +35,7 @@
             </a>
         </div>
 
-        <div class="row">
+        <div class="row" data-th-if="${!canDelete}">
             <form action="#" data-th-action="@{/zglos-naduzycie}" method="post" class="col m8">
                 <input type="hidden" name="advertisementId" data-th-value="${ad.id}">
                 <div class="input-field inline">
