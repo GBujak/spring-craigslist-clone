@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html data-layout-decorate="~{layout}">
+<head>
+    <title>Logowanie</title>
+</head>
+<body>
+    <div data-layout-fragment="content">
+        <form name="f" data-th-action="@{/login}" method="post">
+                <h1>Proszę zaloguj się</h1>
+                <div data-th-if="${param.error}" class="alert alert-error">
+                    Invalid username and password.
+                </div>
+                <div data-th-if="${param.logout}" class="alert alert-success">
+                    You have been logged out.
+                </div>
+                <label for="username">Nazwa użytkownika</label>
+                <input type="text" id="username" name="username"/>
+                <label for="password">Hasło</label>
+                <input type="password" id="password" name="password"/>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                <div class="form-actions">
+                    <button type="submit" class="btn">Log in</button>
+                </div>
+        </form>
+    </div>
+</body>
+</html>
