@@ -3,21 +3,27 @@ version: '3'
 services:
   application-service:
     build: .
+    restart: always
     volumes: 
-      - /var/lib/tablica:/var/lib/tablica
+      - /var/lib/application/images:/var/lib/application/images
     ports:
       - 8080:8080
     depends_on:
-      - database
+      - application-database
     environment:
+      - DB_SERVER=application-database
       - DB_PASSWORD=password
       - DB_USERNAME=postgres
       - DB_DATABASE=mydb
-      - UPLOAD_DIR=/var/lib/tablica/upload
+      - UPLOAD_DIR=/var/lib/application/images
+    links:
+      - application-database
 
-  database:
+  application-database:
     image: postgres
     restart: always
+    volumes:
+      - /var/lib/application/data:/var/lib/postgresql/data
     ports:
       - 5432:5432
     environment:
