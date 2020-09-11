@@ -5,7 +5,7 @@ services:
     build: .
     restart: always
     volumes: 
-      - imagevolume:/var/lib/application/images
+      - imagevolume:/tmp/image_upload
     ports:
       - 8080:8080
     depends_on:
@@ -15,7 +15,7 @@ services:
       - DB_PASSWORD=password
       - DB_USERNAME=postgres
       - DB_DATABASE=mydb
-      - UPLOAD_DIR=/var/lib/application/images
+      - UPLOAD_DIR=/tmp/image_upload
     links:
       - application-database
 
@@ -42,7 +42,7 @@ services:
     volumes:
       - ./conf.d:/etc/nginx/user.conf.d:ro
       - letsencrypt:/etc/letsencrypt
-      - imagevolume:/var/lib/application/images
+      - imagevolume:/tmp/image_upload
 
 volumes:
   letsencrypt:
