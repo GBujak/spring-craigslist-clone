@@ -28,9 +28,12 @@ public class Bootstrap implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (userDetailsService.loadUserByUsername("admin") != null) {
-            System.out.println("--> not running bootstrap, admin exists!");
+        try {
+            userDetailsService.loadUserByUsername("admin");
+            System.out.println("admin exists -> not running bootstrap");
             return;
+        } catch (Exception e) {
+            System.out.println("exception trying to get admin -> running bootstrap");
         }
 
         var testUser = new ApplicationUser();
@@ -41,14 +44,15 @@ public class Bootstrap implements CommandLineRunner {
         var admin = new ApplicationUser();
         admin.setUsername("admin");
         admin.setIsAdmin(true);
-        admin.setPassword(passwordEncoder.encode("admin"));
+        admin.setPassword(passwordEncoder.encode("admin-admin"));
         userDetailsService.save(admin);
 
         var ad = new Advertisement();
-        ad.setHtmlContent("<h1>ad test</h1>");
+        ad.setHtmlContent("<h5>Test ogłoszenia</h5>");
         ad.setCategory(AdvertisementCategory.COMMUNITY);
         ad.setImages(new ArrayList<>());
         ad.setTitle("test ad");
+        ad.setUserName("testuser");
         adService.save(ad);
     }
 }
